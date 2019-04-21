@@ -1,0 +1,35 @@
+{
+  "name": "password-generator",
+  "version": "1.0.0",
+  "description": "Generates password according to flexible and intuitive specification",
+  "main": "src/index.js",
+  "scripts": {
+    "docs": "node_modules/.bin/jsdoc ./src/*.js ./package.json -t ./node_modules/docdash -R README.md -d ./docs -r",
+    "lint": "eslint ./src",
+    "test:unit": "mocha tests/*.js",
+    "test": "npm run lint && npm run test:unit",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dafo90/node-password-generator.git"
+  },
+  "keywords": [
+    "password",
+    "generator",
+    "rules"
+  ],
+  "author": "dafo90",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dafo90/node-password-generator/issues"
+  },
+  "homepage": "https://github.com/dafo90/node-password-generator#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "docdash": "^1.1.0",
+    "eslint": "^5.16.0",
+    "mocha": "^6.1.4"
+  },
+  "dependencies": {}
+}
