@@ -70,7 +70,7 @@ describe('password-generator', function() {
         });
         it('should return a password that contains only symbols', function() {
           expect(
-            new RegExp(/[!@#$%&*()_+-=[]|,.\/?><]{99}/).test(
+            new RegExp(/[!@#$%&*()_+-=\[\]\|,.\/?><]{99}/).test(
               passwordGenerator.generate(99)
             )
           ).to.be.true;
@@ -90,8 +90,54 @@ describe('password-generator', function() {
           expect(new RegExp(/[a-z]+/).test(password)).to.be.true;
           expect(new RegExp(/[A-Z]+/).test(password)).to.be.true;
           expect(new RegExp(/[0-9]+/).test(password)).to.be.true;
-          expect(new RegExp(/[!@#$%&*()_+-=[]|,.\/?><]+/).test(password)).to.be
-            .true;
+          expect(
+            new RegExp(/[\!\@\#\$\%\&\*\(\)\_\+\-\=\[\]\|\,\.\/\?\>\<]+/).test(
+              password
+            )
+          ).to.be.true;
+        });
+      });
+
+      describe('password separed in chunks (mix characters)', function() {
+        describe('standard chunks', function() {
+          beforeEach(function() {
+            passwordGenerator
+              .useLowercase()
+              .useUppercase()
+              .useDigits()
+              .useSymbols();
+          });
+          it('should return a password that contains 4 chunks of 4 characters each, separed by a dash', function() {
+            const password = passwordGenerator.generate(4, {
+              chunk: {}
+            });
+            expect(
+              new RegExp(
+                /([a-zA-Z0-9\!\@\#\$\%\&\*\(\)\_\+\-\=\[\]\|\,\.\/\?\>\<]{4}-){3}[a-zA-Z0-9\!\@\#\$\%\&\*\(\)\_\+\-\=\[\]\|\,\.\/\?\>\<]{4}/
+              ).test(password)
+            ).to.be.true;
+          });
+        });
+
+        describe('configured chunks', function() {
+          beforeEach(function() {
+            passwordGenerator
+              .useLowercase()
+              .useUppercase()
+              .useDigits()
+              .useSymbols();
+          });
+          it('should return a password that contains 8 chunks of 2 characters each, separed by a tilde', function() {
+            const password = passwordGenerator.generate(2, {
+              chunk: { quantity: 8, separator: '~' }
+            });
+            console.log(password);
+            expect(
+              new RegExp(
+                /([a-zA-Z0-9\!\@\#\$\%\&\*\(\)\_\+\-\=\[\]\|\,\.\/\?\>\<]{2}\~){7}[a-zA-Z0-9\!\@\#\$\%\&\*\(\)\_\+\-\=\[\]\|\,\.\/\?\>\<]{2}/
+              ).test(password)
+            ).to.be.true;
+          });
         });
       });
     });
