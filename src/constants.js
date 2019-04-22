@@ -1,6 +1,7 @@
 module.exports = {
   error: {
-    length: 'Length should be a valid positive number'
+    length: 'Length should be a valid positive number',
+    rules: 'No rule has be set.'
   },
   charactersCategories: {
     lowercase: 'abcdefghijklmnopqrstuvwxyz',

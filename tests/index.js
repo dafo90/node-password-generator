@@ -22,6 +22,17 @@ describe('password-generator', function() {
       });
     });
 
+    describe('no rules defined', function() {
+      it('should throw error', function(done) {
+        try {
+          password = passwordGenerator.generate(8);
+        } catch (err) {
+          expect(err.message).to.be.equal(error.rules);
+          done();
+        }
+      });
+    });
+
     describe('the parameter is valid', function() {
       describe('useLowercase', function() {
         beforeEach(function() {

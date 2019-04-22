@@ -30,6 +30,11 @@ PasswordGenerator.prototype.generate = function(length) {
     throw new Error(error.length);
   }
 
+  // Checks if at leat there is a rule
+  if (this.categories.size === 0) {
+    throw new Error(error.rules);
+  }
+
   // Result of the schema definition
   const characters = Array.from(this.categories).map(
     category => charactersCategories[category]
